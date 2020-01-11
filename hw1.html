@@ -2,7 +2,7 @@
 
 <head>
   <!-- Required meta tags -->
-  <title>쇼핑몰</title>
+  <title>예임이 쇼핑몰</title>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -59,6 +59,47 @@
 
   </style>
 
+  <script>
+
+    function ordering() {
+
+      let name = $('#cust-name')
+      let quantity = $('#quantity')
+      let address = $('#cust-address')
+      let number = $('#cust-number')
+      let cust_html = 
+      '<tr>\
+        <th scope="row">' + name.val() + '</th>\
+        <td>' + quantity.val() + '</td>\
+        <td>' + address.val() + '</td>\
+        <td>' + number.val() + '</td>\
+      </tr>';
+
+
+      if (name.val() == '') {
+        alert('주문자 이름을 입력하세요!');
+        name.focus();
+        } else if (quantity.val() == '-- 수량을 선택하세요 --') {
+          alert('수량을 선택하세요!')
+          quantity.focus();
+          } else if (address.val() == '') {
+              alert('주소를 입력하세요!');
+              address.focus();
+            } else if (number.val() == '') {
+                alert('전화번호를 입력하세요!');
+                number.focus();
+              } else {
+                  $('#cust-list').show();
+                  $('#table-body').append(cust_html);
+              }
+              
+
+    }
+
+    
+
+  </script>
+
 
 
 </head>
@@ -81,42 +122,58 @@
       </div>
     </div>
 
-    <div class="input-group mb-3">
+    <!-- 주문자 이름 -->
+    <div class="input-group mb-3"> 
+
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">주문자 이름</span>
       </div>
-      <input type="text" class="form-control"  >
+      <input id="cust-name" type="text" class="form-control"  >
     </div>
-
+    <!-- 수량 -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">수량</label>
+        <label class="input-group-text" for="quantity">수량</label>
       </div>
-      <select class="custom-select" id="inputGroupSelect01">
+      <select id="quantity" class="custom-select"> 
         <option selected>-- 수량을 선택하세요 --</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
     </div>
-
+    <!-- 주소 -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">주소</span>
       </div>
-      <input type="text" class="form-control"  >
+      <input id="cust-address" type="text" class="form-control"  >
     </div>
-
+    <!-- 전화번호 -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">전화번호</span>
       </div>
-      <input type="text" class="form-control"  >
+      <input id="cust-number" type="text" class="form-control"  >
+    </div>
+    
+    <div class="button">
+      <button onclick="ordering()" type="button" class="btn btn-primary">주문하기</button>
     </div>
 
-    <div class="button">
-      <button type="button" class="btn btn-primary">주문하기</button>
-    </div>
+    <table id="cust-list" class="table" style="margin-top:50px; display: none" >
+      <thead>
+        <tr>
+          <th scope="col">이름</th>
+          <th scope="col">수량</th>
+          <th scope="col">주소</th>
+          <th scope="col">전화번호</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+
+      </tbody>
+    </table>
 
   </div>
   
