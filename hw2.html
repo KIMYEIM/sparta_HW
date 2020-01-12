@@ -1,0 +1,194 @@
+<html>
+
+<head>
+  <!-- Required meta tags -->
+  <title>예임이 쇼핑몰</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+  <style>
+
+    * {
+      font-family: 'Nanum Gothic', sans-serif;
+    }
+
+    .page {
+
+      width: 600px;
+      margin: auto;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content:center;
+    }
+
+    .image-box {
+      width: 600px;
+      height: 400px;
+      margin: auto;
+      background-image:url('http://img.hani.co.kr/imgdb/resize/2017/0711/00500691_20170711.JPG');
+      background-size: cover;
+    }
+
+    .product {
+      margin: 30px auto 30px 0;
+    }
+
+    .product-name {
+      font-size: 45px;
+    }
+
+    .product-name > span {
+      font-size: 18px;
+    }
+    
+    .discription {
+      font-size: 16px;
+    }
+
+  </style>
+
+  <script>
+	
+	// 전화번호 검사
+    function checking_number(number) {
+
+          var regExp = /(01)([0|1|6|7|8|9]{1})-([0-9]{3,4})-([0-9]{4})$/;
+
+          if (regExp.test(number) == false) {
+            alert('전화번호를 010-0000-0000의 형태로 입력하세요!');
+            return false;
+          }
+
+          return true; 
+    }
+    // 주문하기
+    function ordering() {
+
+      let name = $('#cust-name');
+      let quantity = $('#quantity');
+      let address = $('#cust-address');
+      let number = $('#cust-number');
+      let cust_html = 
+      '<tr>\
+        <td scope="row">' + name.val() + '</td>\
+        <td>' + quantity.val() + '</td>\
+        <td>' + address.val() + '</td>\
+        <td>' + number.val() + '</td>\
+      </tr>';
+
+
+      if (name.val() == '') { /* 이름 공란이면 */
+        alert('주문자 이름을 입력하세요!');
+        name.focus(); 
+        } else if (quantity.val() == '-- 수량을 선택하세요 --') { 
+          /* 수량 공란이면 */
+          alert('수량을 선택하세요!')
+          quantity.focus();
+          } else if (address.val() == '') { /* 주소 공란이면 */
+              alert('주소를 입력하세요!');
+              address.focus();
+            } else if (number.val() == '') { /* 번호 공란이면 */
+                alert('전화번호를 입력하세요!');
+                number.focus();
+              } else {
+                    checking_number(number.val());
+                    $('#cust-list').show();
+                    $('#table-body').append(cust_html);
+                  }
+            }
+         
+  </script>
+
+
+
+</head>
+
+<body>
+
+
+  <div class="image-box">
+  </div>
+
+  <div class="page">
+
+    <div class="product">
+      <div class="product-name">
+        꼬북칩 콘스프맛
+        <span>가격: 1,500원/개</span>
+      </div>
+      <div class="discription">
+        국내 최초 4겹층층구조! 바삭바삭 꼬북칩 먹어보세요
+      </div>
+    </div>
+
+    <!-- 주문자 이름 -->
+    <div class="input-group mb-3"> 
+
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">주문자 이름</span>
+      </div>
+      <input id="cust-name" type="text" class="form-control"  >
+    </div>
+    <!-- 수량 -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="quantity">수량</label>
+      </div>
+      <select id="quantity" class="custom-select"> 
+        <option selected>-- 수량을 선택하세요 --</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </div>
+    <!-- 주소 -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">주소</span>
+      </div>
+      <input id="cust-address" type="text" class="form-control"  >
+    </div>
+    <!-- 전화번호 -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">전화번호</span>
+      </div>
+      <input id="cust-number" type="text" class="form-control"  >
+    </div>
+    
+    <div class="button">
+      <button onclick="ordering()" type="button" class="btn btn-primary">주문하기</button>
+    </div>
+
+    <table id="cust-list" class="table" style="margin-top:50px; display: none" >
+      <thead>
+        <tr>
+          <th scope="col">이름</th>
+          <th scope="col">수량</th>
+          <th scope="col">주소</th>
+          <th scope="col">전화번호</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+
+      </tbody>
+    </table>
+
+  </div>
+  
+</body>
+
+
+</html>
