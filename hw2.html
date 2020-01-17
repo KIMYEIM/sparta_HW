@@ -102,11 +102,10 @@
             } else if (number.val() == '') { /* 번호 공란이면 */
                 alert('전화번호를 입력하세요!');
                 number.focus();
-              } else {
-                    checking_number(number.val());
-                    $('#cust-list').show();
-                    $('#table-body').append(cust_html);
-                  }
+              } else if (checking_number(number.val()) != false) {
+	    			$('#cust-list').show();
+	                $('#table-body').append(cust_html);
+                 }
             }
          
   </script>
