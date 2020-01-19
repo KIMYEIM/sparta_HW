@@ -15,14 +15,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
   <style>
 
 
-    *{
-
-        font-family: 'Jua', sans-serif;
+    * {
+      font-family: 'Nanum Gothic', sans-serif;
     }
 
     .wrap {
@@ -49,6 +48,10 @@
 
     <script>
 
+        $(document).ready(function(){
+            listing();
+        });
+
         function openClose() {
 
             if ($('#posting-box').css('display') == 'none') {
@@ -59,6 +62,43 @@
                 $('#btn-posting').text('포스팅박스 열기');
             }
         }
+
+        function listing() {
+
+            $.ajax({
+              type: "GET",
+              url: "http://spartacodingclub.shop/post",
+              data: {},
+              success: function(response){
+
+                $('#article-box').empty();
+
+                let articles = response['articles'];
+
+               for (let i = 0; i < articles.length; i++ )   {
+                
+                let comment = articles[i]['comment'];
+                let desc = articles[i]['desc'];
+                let image = articles[i]['image'];
+                let title = articles[i]['title'];
+                let url = articles[i]['url'];
+
+                let temp_html = '<div class="card">\
+                    <img class="card-img-top" src="'+image+'">\
+                    <div class="card-body">\
+                     <a href="'+url+'">'+title+'</a>\
+                     <p class="card-text">'+desc+'</p>\
+                     <p class="comment">'+comment+'</p>\
+                    </div>\
+                    </div>';
+
+                $('#article-box').append(temp_html);                  
+
+               }               
+              }
+            })
+      }
+        
 
     </script>
 
@@ -111,8 +151,8 @@
              <p class="comment">여기에 코멘트가 들어갑니다.</p>
 
          </div>
-     </div>
-    <div class="card">
+         </div>
+        <div class="card">
         <img class="card-img-top" src="https://www.fodors.com/wp-content/uploads/2018/10/2_UltimateRome_TheColosseum-975x650.jpg">
         <div class="card-body">
 
